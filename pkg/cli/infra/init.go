@@ -24,7 +24,6 @@ import (
 	"database/sql"
 	"fmt"
 	"os"
-	"os/user"
 	"strconv"
 	"time"
 
@@ -148,20 +147,6 @@ func getDnoteDir(homeDir string) string {
 	}
 
 	return ret
-}
-
-func getHomeDir() (string, error) {
-	homeDirEnv := os.Getenv("DNOTE_HOME_DIR")
-	if homeDirEnv != "" {
-		return homeDirEnv, nil
-	}
-
-	usr, err := user.Current()
-	if err != nil {
-		return "", errors.Wrap(err, "Failed to get current user")
-	}
-
-	return usr.HomeDir, nil
 }
 
 // InitDB initializes the database.
